@@ -1,7 +1,52 @@
-*,
-*:before,
-*:after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+.grid-container {
+    display: inline-grid;
+    grid-template-columns: 8ch auto;
+    background-color: white;
+    padding: 10px;
+}
+
+.grid-item-outer {
+    background: linear-gradient(to top, rgb(248, 193, 161), rgb(229, 247, 200));
+    height: 700px;
+    width: 500px;
+    padding: 15px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.grid-item-inner {
+    font-size: 15px;
+    text-align: left;
+
+}
+
+.grid-item-upper {
+    display: grid;
+    border: 1px solid rgb(145, 196, 69);
+    margin: 10px;
+}
+
+.dice {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin: 10px;
+}
+
+.grid-item-below-dice {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 10px;
+}
+
+.grid-item-lower {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid rgb(145, 196, 69);
+    margin: 10px;
+    padding: 10px;
+}
+
+.btn {
+    height: 50px;
+    width: 100px;
 }
