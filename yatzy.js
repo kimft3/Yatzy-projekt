@@ -18,7 +18,6 @@ function rollDice() {
 }
 
 function resetGame() {
-    dice = [1, 2, 3, 4, 5]
     diceHeld = [false, false, false, false, false]
     throwCount = 0
 }
@@ -134,8 +133,8 @@ function largeStraightPoints() {
 
 function chancePoints() {
     let value = 0
-    for (let i = 0; 1 < dice.length; i++) {
-        value = value + dice[i]
+    for (let i = 0; i < 5; i++) {
+        value += dice[i]
     }
     return value
 }
@@ -149,6 +148,23 @@ function yatzyPoints() {
         }
     }
     return value
+}
+
+function getResults() {
+    let results = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    for (let i = 0; i <= 5; i++) {
+        results[i] = sameValuePoints(i + 1)
+    }
+    results[6] = onePairPoints()
+    results[7] = twoPairPoints()
+    results[8] = threeSamePoints()
+    results[9] = fourSamePoints()
+    results[10] = fullHousePoints()
+    results[11] = smallStraightPoints()
+    results[12] = largeStraightPoints()
+    results[13] = chancePoints()
+    results[14] = yatzyPoints()
+    return results
 }
 
 function showThrow() {
@@ -227,18 +243,9 @@ function updateFieldsAfterRoll() {
         let j = (dice[i] - 1)
         dieSlotNodes[i].innerHTML = dieFacesIMG[j]
     }
-    //samevalue (1s, 2s, etc) points
-    for (let i = 0; i < 6; i++) {
-        resultFieldNodes[i].value = sameValuePoints(i + 1)
+    //Point fields
+    for (let i = 0; i <= 14; i++){
+        resultFieldNodes[i].value = getResults()[i]
     }
-    // //Other point fields
-    document.getElementById('OnePairText').value = onePairPoints()
-    document.getElementById('TwoPairText').value = twoPairPoints()
-    document.getElementById('ThreeSameText').value = threeSamePoints()
-    document.getElementById('FourSameText').value = fourSamePoints()
-    document.getElementById('FullHouseText').value = fullHousePoints()
-    document.getElementById('SmallStraightText').value = smallStraightPoints()
-    document.getElementById('LargeStraightText').value = largeStraightPoints()
-    document.getElementById('ChanceText').value = largeStraightPoints()
-    document.getElementById('YatzyText').value = yatzyPoints()
+
 }
