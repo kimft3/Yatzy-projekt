@@ -167,22 +167,15 @@ function getResults() {
     return results
 }
 
-function showThrow() {
-    let string = "Turn" + throwCount
-    return string
-}
-
 //---------------------------------------------------------------------------//
 
 const turnCountNode = document.getElementById("turnCounter")
-
 const dieSlotNodes = [document.getElementById("die1"),
     document.getElementById("die2"),
     document.getElementById("die3"),
     document.getElementById("die4"),
     document.getElementById("die5")
 ]
-
 const dieFacesIMG = ["<img src='images/diceone.png' style='height: 40px;'></img>",
     "<img src='images/dicetwo.png' style='height: 40px;'></img>",
     "<img src='images/dicethree.png' style='height: 40px;'></img>",
@@ -190,11 +183,6 @@ const dieFacesIMG = ["<img src='images/diceone.png' style='height: 40px;'></img>
     "<img src='images/dicefive.png' style='height: 40px;'></img>",
     "<img src='images/dicesix.png' style='height: 40px;'></img>"
 ]
-
-for (let i = 0; i < 5; i++) {
-    dieSlotNodes[i].innerHTML = dieFacesIMG[i]
-}
-
 const resultFieldNodes = [document.getElementById('onesText'),
     document.getElementById('twosText'),
     document.getElementById('threesText'),
@@ -211,9 +199,12 @@ const resultFieldNodes = [document.getElementById('onesText'),
     document.getElementById('ChanceText'),
     document.getElementById('YatzyText')
 ]
-
 const rollBtn = document.getElementById("roller")
 rollBtn.addEventListener('click', e => rollDice())
+
+for (let i = 0; i < 5; i++) {
+    dieSlotNodes[i].innerHTML = dieFacesIMG[i]
+}
 
 function gameEndAlert() {
     alert('Spil slut')
