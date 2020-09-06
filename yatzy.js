@@ -247,5 +247,4 @@ function updateFieldsAfterRoll() {
     for (let i = 0; i <= 14; i++){
         resultFieldNodes[i].value = getResults()[i]
     }
-
 }

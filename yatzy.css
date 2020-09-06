@@ -7,7 +7,7 @@
 
 .grid-item-outer {
     background: linear-gradient(to top, rgb(248, 193, 161), rgb(229, 247, 200));
-    height: 700px;
+    height: 630px;
     width: 500px;
     padding: 15px;
     font-size: 15px;
@@ -17,7 +17,7 @@
 .grid-item-inner {
     font-size: 15px;
     text-align: left;
-
+    padding: 2px;
 }
 
 .grid-item-upper {
