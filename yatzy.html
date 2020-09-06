@@ -2,71 +2,112 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Yatzy</title>
-    <link rel="stylesheet" href="yatzy.css">
-    <script src="yatzy.js" defer></script>
+        <meta charset="UTF-8">
+        <title>Yatzy</title>
+        <link rel="stylesheet" href="yatzy.css">
+        <script src="yatzy.js" defer></script>
 </head>
 
 <body>
-    <div class="grid-item-outer">
-        <div class="grid-item-upper">
-            <div class="dice" id="dice">
-                <div id="die1"></div>
-                <div id="die2"></div>
-                <div id="die3"></div>
-                <div id="die4"></div>
-                <div id="die5"></div>
-            </div>
-            <div class="grid-item-below-dice">
-                <div class="grid-item-inner" id="turnCounter">Turn 0</div>
-                <div class="grid-item-inner" id="spaceDice"></div>
-                <div class="grid-item-inner" id="rollBtn">
-                    <input class="btn" type="button" id="roller" value="Let's Roll!" style="float: right;"></div>
-            </div>
+        <div class="grid-item-outer">
+                <div class="grid-item-upper">
+                        <div class="dice" id="dice">
+                                <div id="die1"></div>
+                                <div id="die2"></div>
+                                <div id="die3"></div>
+                                <div id="die4"></div>
+                                <div id="die5"></div>
+                        </div>
+                        <div class="grid-item-below-dice">
+                                <div class="grid-item-inner" id="turnCounter">Turn 0</div>
+                                <div class="grid-item-inner" id="spaceDice"></div>
+                                <div class="grid-item-inner" id="rollBtn">
+                                        <input class="btn" type="button" id="roller" value="Let's Roll!"
+                                                style="float: right;"></div>
+                        </div>
+                </div>
+                <div class="grid-item-lower">
+                        <div class="grid-item-inner">1s</div>
+                        <div class="grid-item-inner" id="ones"><textarea id="onesText" cols="3" rows="1" readOnly="true"
+                                style="resize: none;"></textarea></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner">2s</div>
+                        <div class="grid-item-inner" id="twos"><textarea id="twosText" cols="3" rows="1" readOnly="true"
+                                        style="resize: none;"></textarea></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner">3s</div>
+                        <div class="grid-item-inner" id="threes"><textarea id="threesText" cols="3" rows="1"
+                                        readOnly="true" style="resize: none;"></textarea></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner">4s</div>
+                        <div class="grid-item-inner" id="fours"><textarea id="foursText" cols="3" rows="1"
+                                        readOnly="true" style="resize: none;"></textarea></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner">5s</div>
+                        <div class="grid-item-inner" id="fives"><textarea id="fivesText" cols="3" rows="1"
+                                        readOnly="true" style="resize: none;"></textarea></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner">6s</div>
+                        <div class="grid-item-inner" id="sixes"><textarea id="sixesText" cols="3" rows="1"
+                                        readOnly="true" style="resize: none;"></textarea></div>
+
+                        <div class="grid-item-inner" id="sum">Sum: <textarea id="sumText" cols="3" rows="1"
+                                        readOnly="true" style="resize: none;"></textarea></div>
+                        <div class="grid-item-inner" id="Bonus">Bonus: <textarea id="bonusText" cols="3" rows="1"
+                                        readOnly="true" style="resize: none;"></textarea></div>
+
+                        <div class="grid-item-inner">One pair</div>
+                        <div class="grid-item-inner" id="OnePair"><textarea id="OnePairText" cols="3" rows="1"
+                                        readOnly="true" style="resize: none;"></textarea></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner">Two pair</div>
+                        <div class="grid-item-inner" id="TwoPair"><textarea id="TwoPairText" cols="3" rows="1"
+                                        readOnly="true" style="resize: none;"></textarea></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner">Three same</div>
+                        <div class="grid-item-inner" id="ThreeSame"><textarea id="ThreeSameText" cols="3" rows="1"
+                                        readOnly="true" style="resize: none;"></textarea></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner">Four same</div>
+                        <div class="grid-item-inner" id="FourSame"><textarea id="FourSameText" cols="3" rows="1"
+                                        readOnly="true" style="resize: none;"></textarea></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner">Full house</div>
+                        <div class="grid-item-inner" id="FullHouse"><textarea id="FullHouseText" cols="3" rows="1"
+                                        readOnly="true" style="resize: none;"></textarea></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner">Small straight</div>
+                        <div class="grid-item-inner" id="SmallStraight"><textarea id="SmallStraightText" cols="3"
+                                        rows="1" readOnly="true" style="resize: none;"></textarea></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner">Large straight</div>
+                        <div class="grid-item-inner" id="LargeStraight"><textarea id="LargeStraightText" cols="3"
+                                        rows="1" readOnly="true" style="resize: none;"></textarea></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner">Chance</div>
+                        <div class="grid-item-inner" id="Chance"><textarea id="ChanceText" cols="3" rows="1"
+                                        readOnly="true" style="resize: none;"></textarea></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner">Yatzy</div>
+                        <div class="grid-item-inner" id="Yatzy"><textarea id="YatzyText" cols="3" rows="1"
+                                        readOnly="true" style="resize: none;"></textarea></div>
+                        <div class="grid-item-inner" id="space"></div>
+                        <div class="grid-item-inner" id="space"></div>
+                </div>
         </div>
-        <div class="grid-item-lower">
-            <div class="grid-item-inner">1s</div>
-            <div class="grid-item-inner" id="ones"><textarea name="onesTextArea" id="onesText" cols="3" rows="1"
-                    readOnly="true" style="resize: none;"></textarea></div>
-            <div class="grid-item-inner" id="space"></div>
-            <div class="grid-item-inner" id="space"></div>
-
-            <div class="grid-item-inner">2s</div>
-            <div class="grid-item-inner" id="twos"><textarea name="twosTextArea" id="twosText" cols="3" rows="1"
-                    readOnly="true" style="resize: none;"></textarea></div>
-            <div class="grid-item-inner" id="space"></div>
-            <div class="grid-item-inner" id="space"></div>
-
-            <div class="grid-item-inner">3s</div>
-            <div class="grid-item-inner" id="threes"><textarea name="threesTextArea" id="threesText" cols="3" rows="1"
-                    readOnly="true" style="resize: none;"></textarea></div>
-            <div class="grid-item-inner" id="space"></div>
-            <div class="grid-item-inner" id="space"></div>
-
-            <div class="grid-item-inner">4s</div>
-            <div class="grid-item-inner" id="fours"><textarea name="foursTextArea" id="foursText" cols="3" rows="1"
-                    readOnly="true" style="resize: none;"></textarea></div>
-            <div class="grid-item-inner" id="space"></div>
-            <div class="grid-item-inner" id="space"></div>
-
-            <div class="grid-item-inner">5s</div>
-            <div class="grid-item-inner" id="fives"><textarea name="fivesTextArea" id="fivesText" cols="3" rows="1"
-                    readOnly="true" style="resize: none;"></textarea></div>
-            <div class="grid-item-inner" id="space"></div>
-            <div class="grid-item-inner" id="space"></div>
-
-            <div class="grid-item-inner">6s</div>
-            <div class="grid-item-inner" id="sixes"><textarea name="sixesTextArea" id="sixesText" cols="3" rows="1"
-                    readOnly="true" style="resize: none;"></textarea></div>
-            <div class="grid-item-inner" id="sum">Sum: <textarea name="sumtext" id="sumText" cols="3" rows="1"
-                    readOnly="true"
-                    style="resize: none;"></textarea style="resize: none;"></div>
-            <div class="grid-item-inner" id="Bonus">Bonus: <textarea name="bonustext" id="bonusText" cols="3" rows="1" readOnly = "true" style="resize: none;"></textarea>
-            </div>
-
-        </div>
-    </div>
 </body>
 
 </html>

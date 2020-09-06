@@ -177,14 +177,14 @@ function showThrow() {
 
 const turnCountNode = document.getElementById("turnCounter")
 
-const dieSlots = [document.getElementById("die1"),
+const dieSlotNodes = [document.getElementById("die1"),
     document.getElementById("die2"),
     document.getElementById("die3"),
     document.getElementById("die4"),
     document.getElementById("die5")
 ]
 
-const dieFaces = ["<img src='images/diceone.png' style='height: 40px;'></img>",
+const dieFacesIMG = ["<img src='images/diceone.png' style='height: 40px;'></img>",
     "<img src='images/dicetwo.png' style='height: 40px;'></img>",
     "<img src='images/dicethree.png' style='height: 40px;'></img>",
     "<img src='images/dicefour.png' style='height: 40px;'></img>",
@@ -193,10 +193,10 @@ const dieFaces = ["<img src='images/diceone.png' style='height: 40px;'></img>",
 ]
 
 for (let i = 0; i < 5; i++) {
-    dieSlots[i].innerHTML = dieFaces[i]
+    dieSlotNodes[i].innerHTML = dieFacesIMG[i]
 }
 
-const resultFields = [document.getElementById('onesText'),
+const resultFieldNodes = [document.getElementById('onesText'),
     document.getElementById('twosText'),
     document.getElementById('threesText'),
     document.getElementById('foursText'),
@@ -213,9 +213,11 @@ function gameEndAlert() {
     resetGUI()
 }
 
+//Resets GUI after game end
 function resetGUI() {
-    for (let i = 0; i < 6; i++) {
-        resultFields[i].value = 0
+    turnCountNode.innerText = "Turn " + throwCount
+    for (let i = 0; i <= 6; i++) {
+        resultFieldNodes[i].value = 0
     }
 }
 
@@ -225,10 +227,12 @@ function updateFieldsAfterRoll() {
     //Dice display
     for (let i = 0; i < 5; i++) {
         let j = (dice[i] - 1)
-        dieSlots[i].innerHTML = dieFaces[j]
+        dieSlotNodes[i].innerHTML = dieFacesIMG[j]
     }
     //samevalue (1s, 2s, etc) points
     for (let i = 0; i < 6; i++) {
-        resultFields[i].value = sameValuePoints(i + 1)
+        resultFieldNodes[i].value = sameValuePoints(i + 1)
     }
+    //Pair points
+    document.getElementById('OnePairText').value = onePairPoints()
 }
