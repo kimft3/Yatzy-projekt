@@ -175,13 +175,13 @@ function getResults() {
 }
 
 function calcSum(){
-    let sumTextNode = 0
+    let sum = 0
     for (let i = 0; i <= 5; i++){
         if (resultFieldNodeHeld[i]) {
-            sumTextNode += resultFieldNodes[i].value
+            sum += parseInt(resultFieldNodes[i].value)
         }
     }
-    return sumTextNode
+    return sum
 }
 
 //---------------------------------------------------------------------------//
@@ -269,7 +269,6 @@ function throwNoChoiceAlert() {
     alert('Please choose some points to keep for the next round')
 }
 
-//Resets GUI after game end
 function updateGUI() {
     //throwCount
     turnCountNode.innerText = "Turn " + throwCount
@@ -283,11 +282,8 @@ function updateGUI() {
         resultFieldNodes[i].value = 0
         }
     }
-    const sumTextNode = document.getElementById('sumText')
-    let x = "" 
-    x+= sumTextNode.value
-    x += calcSum()
-    sumTextNode.value = x
+   //Sum
+   document.getElementById('sumText').value = calcSum()
 }
 
 function updateFieldsAfterRoll() {
