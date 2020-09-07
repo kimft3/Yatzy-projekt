@@ -266,7 +266,7 @@ function gameEndAlert() {
 }
 
 function throwNoChoiceAlert() {
-    //TODO
+    alert('Please choose some points to keep for the next round')
 }
 
 //Resets GUI after game end
