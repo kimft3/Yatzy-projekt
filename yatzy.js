@@ -237,16 +237,16 @@ const rollBtn = document.getElementById("roller")
 rollBtn.addEventListener('click', e => rollDice())
 
 //gameInit
-    for (let i = 0; i < 15; i++) {
-        resultFieldNodeHeld[i] = false
-        resultFieldNodes[i].addEventListener('click', e => selectPointField(i))
-    }
-    for (let i = 0; i < 5; i++) {
-        dieSlotNodes[i].innerHTML = dieFacesIMG[i]
-    }
-    for (let i = 0; i < 6; i++) {
-        dieSlotNodes[i].addEventListener('click', e => hold(i))
-    }
+for (let i = 0; i < 15; i++) {
+    resultFieldNodeHeld[i] = false
+    resultFieldNodes[i].addEventListener('click', e => selectPointField(i))
+}
+for (let i = 0; i < 5; i++) {
+    dieSlotNodes[i].innerHTML = dieFacesIMG[i]
+}
+for (let i = 0; i < 6; i++) {
+    dieSlotNodes[i].addEventListener('click', e => hold(i))
+}
 
 
 function selectPointField(i) {
@@ -276,9 +276,6 @@ function gameEndAlert() {
     }
     resetRoundGame()
     updateGUI()
-    // if (roundCount == 15) {
-    //     gameInit()
-    // }
 }
 
 function throwNoChoiceAlert() {
