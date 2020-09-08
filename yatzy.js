@@ -24,7 +24,7 @@ function rollDice() {
     }
 }
 
-function resetRound() {
+function resetRoundGame() {
     diceHeld = [false, false, false, false, false]
     throwCount = 0
     if(roundCount==15){
@@ -275,7 +275,7 @@ function gameEndAlert() {
     } else {
         alert('Game Over')
     }
-    resetRound()
+    resetRoundGame()
     updateGUI()
 }
 
@@ -303,6 +303,8 @@ function updateGUI() {
      if(sum>49){
      document.getElementById('bonusText').value=50
     total+=50
+    }else{
+        document.getElementById('bonusText').value=0  
     }
     document.getElementById('TotalText').value=total
 }
