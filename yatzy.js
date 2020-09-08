@@ -27,6 +27,11 @@ function rollDice() {
 function resetRound() {
     diceHeld = [false, false, false, false, false]
     throwCount = 0
+    if(roundCount==15){
+        for(let i=0;i<15;i++){
+            resultFieldNodeHeld[i]=false;
+        }
+    }
 }
 
 function frequency() {
@@ -175,15 +180,24 @@ function getResults() {
 }
 
 function calcSum(){
-    let sum = 0
+    let sumTextNode = 0
     for (let i = 0; i <= 5; i++){
         if (resultFieldNodeHeld[i]) {
-            sum += parseInt(resultFieldNodes[i].value)
+            sumTextNode += parseInt(resultFieldNodes[i].value)
         }
     }
-    return sum
+    return sumTextNode
 }
-
+function calcTotal(){
+    let totalTextNode = 0
+    for (let i = 0; i < 15; i++){
+        if (resultFieldNodeHeld[i]) {
+            totalTextNode += parseInt(resultFieldNodes[i].value)
+            resultFieldNodes[i].style.color='red';
+        }
+    }
+    return totalTextNode
+}
 //---------------------------------------------------------------------------//
 
 const turnCountNode = document.getElementById("turnCounter")
@@ -258,10 +272,10 @@ function hold(i){
 function gameEndAlert() {
     if (roundCount < 15) {
         alert('Round Over')
-        resetRound()
     } else {
         alert('Game Over')
     }
+    resetRound()
     updateGUI()
 }
 
@@ -280,10 +294,17 @@ function updateGUI() {
     for (let i = 0; i <= 14; i++) {
         if (!resultFieldNodeHeld[i] || roundCount == 15){
         resultFieldNodes[i].value = 0
+        resultFieldNodes[i].style.color='black'
         }
     }
-   //Sum
-   document.getElementById('sumText').value = calcSum()
+    let sum=calcSum()
+    let total=calcTotal();
+     document.getElementById('sumText').value=sum
+     if(sum>49){
+     document.getElementById('bonusText').value=50
+    total+=50
+    }
+    document.getElementById('TotalText').value=total
 }
 
 function updateFieldsAfterRoll() {
