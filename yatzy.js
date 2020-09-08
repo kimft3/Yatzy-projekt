@@ -30,6 +30,7 @@ function resetRoundGame() {
     if (roundCount == 15) {
         for (let i = 0; i < 15; i++) {
             resultFieldNodeHeld[i] = false;
+            resultFieldNodes[i].style.color = 'black'
         }
     }
 }
@@ -291,15 +292,14 @@ function updateGUI() {
     }
     //Point fields
     for (let i = 0; i <= 14; i++) {
-        if (!resultFieldNodeHeld[i] || roundCount == 15) {
+        if (!resultFieldNodeHeld[i]) {
             resultFieldNodes[i].value = 0
-            resultFieldNodes[i].style.color = 'black'
         }
     }
     let sum = calcSum()
     let total = calcTotal();
     document.getElementById('sumText').value = sum
-    if (sum > 49) {
+    if (sum > 61) {
         document.getElementById('bonusText').value = 50
         total += 50
     } else {
