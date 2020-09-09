@@ -190,16 +190,6 @@ function calcSum() {
     }
     return sumTextNode
 }
-function calcTotal(){
-    let totalTextNode = 0
-    for (let i = 0; i < 15; i++){
-        if (resultFieldNodeHeld[i]) {
-            totalTextNode += parseInt(resultFieldNodes[i].value)
-            resultFieldNodes[i].style.color='red';
-        }
-    }
-    return totalTextNode
-}
 
 function calcTotal() {
     let total = 0
