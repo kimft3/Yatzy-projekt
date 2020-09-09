@@ -5,7 +5,7 @@ let selectedInTurn = -1
 let roundCount = 0
 
 function rollDice() {
-    if (throwCount < 3) {
+    if (throwCount < 3 && selectedInTurn == -1) {
         for (let i = 0; i < 5; i++) {
             if (!diceHeld[i]) {
                 dice[i] = Math.floor((Math.random() * 6) + 1)
@@ -16,7 +16,7 @@ function rollDice() {
     } else if (selectedInTurn == -1) {
         throwNoChoiceAlert()
     } else {
-        resultFieldNodeHeld[selectedInTurn] = true 
+        resultFieldNodeHeld[selectedInTurn] = true
         selectedInTurn = -1
         roundCount++
         calcSum()
@@ -27,13 +27,15 @@ function rollDice() {
 function resetRoundGame() {
     diceHeld = [false, false, false, false, false]
     throwCount = 0
-    if(roundCount==15){
-        for(let i=0;i<15;i++){
-            resultFieldNodeHeld[i]=false;
+    if (roundCount > 14) {
+        for (let i = 0; i < 15; i++) {
+            resultFieldNodeHeld[i] = false;
         }
+        roundCount = 0
     }
 }
 
+// zero is not utilized. Array length is seven to make the other functions more transparent, and avoid off by one errors
 function frequency() {
     let freq = [0, 0, 0, 0, 0, 0, 0]
     for (let i = 1; i < 7; i++) {
@@ -179,9 +181,9 @@ function getResults() {
     return results
 }
 
-function calcSum(){
-    let sumTextNode = 0
-    for (let i = 0; i <= 5; i++){
+function calcSum() {
+    let sum = 0
+    for (let i = 0; i <= 5; i++) {
         if (resultFieldNodeHeld[i]) {
             sumTextNode += parseInt(resultFieldNodes[i].value)
         }
@@ -198,7 +200,19 @@ function calcTotal(){
     }
     return totalTextNode
 }
-//---------------------------------------------------------------------------//
+
+function calcTotal() {
+    let total = 0
+    for (let i = 0; i < 15; i++) {
+        if (resultFieldNodeHeld[i]) {
+            total += parseInt(resultFieldNodes[i].value)
+            resultFieldNodes[i].style.color = 'red'
+        }
+    }
+    return total
+}
+
+//----------------------------------GUI-----------------------------------------//
 
 const turnCountNode = document.getElementById("turnCounter")
 const dieSlotNodes = [document.getElementById("die1"),
@@ -214,7 +228,6 @@ const dieFacesIMG = ["<img src='images/diceone.png' style='height: 40px;'</img>"
     "<img src='images/dicefive.png' style='height: 40px;'></img>",
     "<img src='images/dicesix.png' style='height: 40px;'></img>"
 ]
-
 const resultFieldNodes = [document.getElementById('onesText'),
     document.getElementById('twosText'),
     document.getElementById('threesText'),
@@ -231,49 +244,52 @@ const resultFieldNodes = [document.getElementById('onesText'),
     document.getElementById('ChanceText'),
     document.getElementById('YatzyText')
 ]
-
 const resultFieldNodeHeld = []
-for (let i = 0; i < 15; i++){
+const rollBtn = document.getElementById("roller")
+rollBtn.addEventListener('click', e => rollDice())
+
+//gameInit
+for (let i = 0; i < 15; i++) {
     resultFieldNodeHeld[i] = false
-}
-for (let i = 0; i < 15; i++){
     resultFieldNodes[i].addEventListener('click', e => selectPointField(i))
 }
+for (let i = 0; i < 5; i++) {
+    dieSlotNodes[i].innerHTML = dieFacesIMG[i]
+}
+for (let i = 0; i < 6; i++) {
+    dieSlotNodes[i].addEventListener('click', e => hold(i))
+}
 
-function selectPointField(i){
-    if (!resultFieldNodeHeld[i]){
+
+function selectPointField(i) {
+    if (!resultFieldNodeHeld[i]) {
         selectedInTurn = i
     }
 }
 
-const rollBtn = document.getElementById("roller")
-rollBtn.addEventListener('click', e => rollDice())
-
-for (let i = 0; i < 5; i++) {
-    dieSlotNodes[i].innerHTML = dieFacesIMG[i]
-}
-
-
-for (let i = 0; i < 6; i++){
-  dieSlotNodes[i].addEventListener('click', e => hold(i))
-}
-
-function hold(i){
-    if (!diceHeld[i]){
-        diceHeld[i] = true
-        dieSlotNodes[i].innerHTML += "<br>Held" 
-   } else {
-       let die = (dice[i] - 1)
-        diceHeld[i] =false
-        dieSlotNodes[i].innerHTML = dieFacesIMG[die] 
+function hold(i) {
+    if (throwCount >= 1) {
+        if (!diceHeld[i]) {
+            diceHeld[i] = true
+            dieSlotNodes[i].innerHTML += "<br>Held"
+        } else {
+            let die = (dice[i] - 1)
+            diceHeld[i] = false
+            dieSlotNodes[i].innerHTML = dieFacesIMG[die]
+        }
     }
 }
 
 function gameEndAlert() {
-    if (roundCount < 15) {
-        alert('Round Over')
-    } else {
-        alert('Game Over')
+    if (roundCount > 14) {
+        //alert('Round Over')
+        //} else {
+        let proceed = confirm('You got: ' + calcTotal() + ' points! Play again?');
+        if (proceed) {
+        //alert('Please close window')
+        // } else {
+            roundCount = 15
+        }
     }
     resetRoundGame()
     updateGUI()
@@ -291,22 +307,22 @@ function updateGUI() {
         dieSlotNodes[i].innerHTML = dieFacesIMG[i]
     }
     //Point fields
-    for (let i = 0; i <= 14; i++) {
-        if (!resultFieldNodeHeld[i] || roundCount == 15){
-        resultFieldNodes[i].value = 0
-        resultFieldNodes[i].style.color='black'
+    for (let i = 0; i < 15; i++) {
+        if (!resultFieldNodeHeld[i]) {
+            resultFieldNodes[i].value = 0
+            resultFieldNodes[i].style.color = 'black'
         }
     }
-    let sum=calcSum()
-    let total=calcTotal();
-     document.getElementById('sumText').value=sum
-     if(sum>49){
-     document.getElementById('bonusText').value=50
-    total+=50
-    }else{
-        document.getElementById('bonusText').value=0  
+    let sum = calcSum()
+    let total = calcTotal();
+    document.getElementById('sumText').value = sum
+    if (sum > 61) {
+        document.getElementById('bonusText').value = 50
+        total += 50
+    } else {
+        document.getElementById('bonusText').value = 0
     }
-    document.getElementById('TotalText').value=total
+    document.getElementById('TotalText').value = total
 }
 
 function updateFieldsAfterRoll() {
@@ -315,14 +331,14 @@ function updateFieldsAfterRoll() {
     //Dice display
     for (let i = 0; i < 5; i++) {
         let j = (dice[i] - 1)
-        if (!diceHeld[i]){
-        dieSlotNodes[i].innerHTML = dieFacesIMG[j]
+        if (!diceHeld[i]) {
+            dieSlotNodes[i].innerHTML = dieFacesIMG[j]
         }
     }
     //Point fields
-    for (let i = 0; i <= 14; i++){
+    for (let i = 0; i < 15; i++) {
         if (!resultFieldNodeHeld[i]) {
-        resultFieldNodes[i].value = getResults()[i]
+            resultFieldNodes[i].value = getResults()[i]
         }
     }
 }
