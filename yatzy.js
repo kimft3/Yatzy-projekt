@@ -275,9 +275,9 @@ function gameEndAlert() {
         //alert('Round Over')
         //} else {
         let proceed = confirm('You got: ' + calcTotal() + ' points! Play again?');
-        if (!proceed) {
-            alert('Please close window')
-        } else {
+        if (proceed) {
+        //alert('Please close window')
+        // } else {
             roundCount = 15
         }
     }
