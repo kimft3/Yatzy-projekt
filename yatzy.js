@@ -304,7 +304,7 @@ function updateGUI() {
      document.getElementById('bonusText').value=50
     total+=50
     }else{
-        document.getElementById('bonusText').value=0;  
+        document.getElementById('bonusText').value=0  
     }
     document.getElementById('TotalText').value=total
 }
