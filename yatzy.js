@@ -5,7 +5,7 @@ let selectedInTurn = -1
 let roundCount = 0
 
 function rollDice() {
-    if (throwCount < 3) {
+    if (throwCount < 3 && selectedInTurn == -1) {
         for (let i = 0; i < 5; i++) {
             if (!diceHeld[i]) {
                 dice[i] = Math.floor((Math.random() * 6) + 1)
@@ -27,14 +27,15 @@ function rollDice() {
 function resetRoundGame() {
     diceHeld = [false, false, false, false, false]
     throwCount = 0
-    if (roundCount == 15) {
+    if (roundCount > 14) {
         for (let i = 0; i < 15; i++) {
             resultFieldNodeHeld[i] = false;
-            resultFieldNodes[i].style.color = 'black'
         }
+        roundCount = 0
     }
 }
 
+// zero is not utilized. Array length is seven to make the other functions more transparent, and avoid off by one errors
 function frequency() {
     let freq = [0, 0, 0, 0, 0, 0, 0]
     for (let i = 1; i < 7; i++) {
@@ -270,10 +271,15 @@ function hold(i) {
 }
 
 function gameEndAlert() {
-    if (roundCount < 15) {
-        alert('Round Over')
-    } else {
-        alert('Game Over')
+    if (roundCount > 14) {
+        //alert('Round Over')
+        //} else {
+        let proceed = confirm('You got: ' + calcTotal() + ' points! Play again?');
+        if (!proceed) {
+            alert('Please close window')
+        } else {
+            roundCount = 15
+        }
     }
     resetRoundGame()
     updateGUI()
@@ -291,9 +297,10 @@ function updateGUI() {
         dieSlotNodes[i].innerHTML = dieFacesIMG[i]
     }
     //Point fields
-    for (let i = 0; i <= 14; i++) {
+    for (let i = 0; i < 15; i++) {
         if (!resultFieldNodeHeld[i]) {
             resultFieldNodes[i].value = 0
+            resultFieldNodes[i].style.color = 'black'
         }
     }
     let sum = calcSum()
@@ -319,7 +326,7 @@ function updateFieldsAfterRoll() {
         }
     }
     //Point fields
-    for (let i = 0; i <= 14; i++) {
+    for (let i = 0; i < 15; i++) {
         if (!resultFieldNodeHeld[i]) {
             resultFieldNodes[i].value = getResults()[i]
         }
